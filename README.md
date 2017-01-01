@@ -9,6 +9,29 @@ JFrame完美支持composer安装使用，依赖的外部库Smarty不加入版本
 
 JFrame非常适合用于微小PHP项目或内部流量可控、可预测项目，用于大中型项目请谨慎选择。
 
+## JFrame文件夹结构说明
+
+~~~
+www  WEB部署目录，名称任意
+├─wwwRoot               web根目录，项目的入口根目录需设置该目录为web根目录
+│  ├─static             微小项目的css、js、images等前端静态文件的目录
+│  │  ├─css             前端所有css文件目录
+│  │  ├─js              前端所有js文件目录
+│  │  ├─images          前端所有资源图片文件目录
+│  │  └─ ...            其他静态资源文件目录或文件
+│  │
+│  ├─index.php          微小项目的统一入口文件，pathinfo模式的入口
+│  └─ ...               其他项目文件或目录
+│
+├─JFrame                JFrame微小框架所有核心文件目录
+│  ├─library            JFrame微小框架底层类库文件目录
+│  ├─
+│  ├─
+│  └─JFrame.php         JFrame微小框架入口文件
+│
+├─.gitignore            git版本控制库的忽略规则文件
+└─composer.json         composer的配置文件
+~~~
 
 ## JFrame的MVC支持情况
 
