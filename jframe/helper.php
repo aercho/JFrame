@@ -211,7 +211,7 @@ if (!function_exists('rand_string')) {
         }else{
             // 中文随机字
             for($i=0;$i<$len;$i++){
-              $str.= self::msubstr($chars, floor(mt_rand(0,mb_strlen($chars,'utf-8')-1)),1,'utf-8',false);
+              $str.= mbsubstr($chars, floor(mt_rand(0,mb_strlen($chars,'utf-8')-1)),1,'utf-8',false);
             }
         }
         return $str;
@@ -6830,7 +6830,7 @@ if (!function_exists('is_citizen_id_valid')) {
         $BirthMonth         =   substr($id, 10, 2);
         $BirthDay           =   substr($id, 12, 2);
         $Sex                =   substr($id, 16,1) % 2 ;//男1 女0
-        if(is_null($oCity[$City])) {
+        if(!array_key_exists($City)) {
             return false;
         }
         #年份超限

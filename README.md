@@ -14,25 +14,44 @@ JFrame非常适合用于微小PHP项目或内部流量可控、可预测项目�
 
 ### JFrame文件结构
 ~~~
-www  WEB部署目录，名称任意
-├─wwwRoot               web根目录，项目的入口根目录需设置该目录为web根目录
-│  ├─static             微小项目的css、js、images等前端静态文件的目录
-│  │  ├─css             前端所有css文件目录
-│  │  ├─js              前端所有js文件目录
-│  │  ├─images          前端所有资源图片文件目录
-│  │  └─ ...            其他静态资源文件目录或文件
-│  │
-│  ├─index.php          微小项目的统一入口文件，pathinfo模式的入口
-│  └─ ...               其他项目文件或目录
+www  WEB部署目录，可以是web根目录也可以是web根目录下的子目录，名称任意
 │
-├─JFrame                JFrame微小框架所有核心文件目录
-│  ├─library            JFrame微小框架底层类库文件目录
-│  ├─
-│  ├─
-│  └─JFrame.php         JFrame微小框架入口文件
+├─jframe                JFrame微小框架核心
+│   ├─library           JFrame核心类所在文件夹
+│   │   ├─jframe        基于命名空间的JFrame核心类文件夹目录
+│   │
+│   │
+│   ├─helper.php        JFrame微小框架提供的常用函数库，核心框架不依赖
+│   └─JFrame.php        JFrame微小框架入口文件
 │
+├─vendor                composer相关目录
+│   ├─composer          composer自动加载器相关目录
+│   ├─smarty            JFrame依赖的模板引擎smarty，可使用composer单独维护更新
+│   ├─...               其他具体项目所安装依赖的使用composer安装的库
+│   └─autoload.php      composer提供的自动加载器引用文件
+│
+│
+├─application           基于JFrame的应用层PHP文件(应用层控制器、模块、模板之类的)
+│    ├─controller       应用控制器目录，基于JFrame的应用控制器开发目录
+│    ├─model            应用模块目录，基于JFrame的应用模块开发目录；这里的模块原则上与数据库中表一一对应
+│    ├─runtime          应用运行时目录--缓存、日志等
+│    ├─view             应用视图层模板文件目录
+│    └─config.php       应用配置文件目录，微小项目仅该一个配置文件
+│
+│
+├─asset                 微小项目的css、js、images等前端静态文件的目录
+│   ├─css               前端所有css文件目录
+│   ├─js                前端所有js文件目录
+│   ├─images            前端所有资源图片文件目录
+│   └─ ...              其他静态资源文件目录或文件
+│
+├─composer.json         composer的配置文件
+├─composer.lock         composer的配置锁文件
 ├─.gitignore            git版本控制库的忽略规则文件
-└─composer.json         composer的配置文件
+├─LICENSE
+├─README.md
+│
+└─index.php             微小项目的统一入口文件，pathinfo模式的入口
 ~~~
 
 ### 目录和文件
