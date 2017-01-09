@@ -1,6 +1,2 @@
 .idea
 composer.lock
-/vendor
-!/vendor/composer
-!/vendor/smarty
-!/vendor/autoload.php
