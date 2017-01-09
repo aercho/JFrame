@@ -18,9 +18,9 @@ use jframe\exception\ClassNotFoundException;
 
 class Loader
 {
-    protected static $instance = [];
+    protected static $instance        = [];
     // 类名映射
-    protected static $map      = [];
+    protected static $map             = [];
 
     // PSR-4
     private static $prefixLengthsPsr4 = [];
@@ -227,7 +227,7 @@ class Loader
         spl_autoload_register($autoload ?: 'jframe\\Loader::autoload', true, true);
         // 注册命名空间定义
         self::addNamespace([
-            'frame'    => LIB_PATH . 'jframe' . DS
+            'jframe'    => LIB_PATH . 'jframe' . DS
         ]);
 
         // Composer自动加载支持

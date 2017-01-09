@@ -10,6 +10,24 @@
  * @date    2017-01-06 14:28:46
  * @version $Id$
  */
+require './jframe/jframe.php';
 
-require '../JFrame/JFrame.php';
-dump(__FILE__);
+/**
+
+
+// Undefined variable: b
+$a = $b;
+
+// Division by zero
+$b = 0;
+$a = 3 / $b;
+
+
+// Fatal error: Class 'wechatsdk' not found
+new wechatsdk();
+
+
+throw new Exception('$error');
+
+*/
+// $1231fasd;

@@ -1,6 +1,10 @@
 <?php
 /**
  * 错误、异常处理
+ * --------------
+ * 1、捕获错误、异常消息并统一封装处理
+ * 2、捕获错误、异常后统一渲染错误提示页面并终止程序的运行
+ * --------------
  * @authors Jea杨 (JJonline@JJonline.Cn)
  * @date    2017-01-06 16:59:23
  * @version $Id$
@@ -32,16 +36,15 @@ class Error
      */
     public static function appException($e)
     {
+        //Error类型的错误异常在PHP7中被实现
         if (!$e instanceof \Exception) {
             $e = new ThrowableError($e);
         }
 
+        //记录错误消息至日志系统--底层是否写入日子等依据debug模式
         self::getExceptionHandler()->report($e);
-        if (IS_CLI) {
-            self::getExceptionHandler()->renderForConsole(new ConsoleOutput, $e);
-        } else {
-            self::getExceptionHandler()->render($e)->send();
-        }
+        //友好输出异常或错误信息
+        self::getExceptionHandler()->send($e);
     }
 
     /**
@@ -55,13 +58,12 @@ class Error
      */
     public static function appError($errno, $errstr, $errfile = '', $errline = 0, $errcontext = [])
     {
+        // 将错误信息托管至 jframe\exception\ErrorException 异常，由异常统一显示debug消息或记录日志
         $exception = new ErrorException($errno, $errstr, $errfile, $errline, $errcontext);
-        if (error_reporting() & $errno) {
-            // 将错误信息托管至 think\exception\ErrorException
-            throw $exception;
-        } else {
-            self::getExceptionHandler()->report($exception);
-        }
+
+        // 由错误触发该方法，该方法手动抛出异常try、catch语句方可被承接到
+        // 直接执行self::appException($exception);将跳过try、catch语句
+        // throw $exception;
     }
 
     /**
@@ -70,14 +72,14 @@ class Error
     public static function appShutdown()
     {
         if (!is_null($error = error_get_last()) && self::isFatal($error['type'])) {
-            // 将错误信息托管至think\ErrorException
+            // 将致命错误托管至jframe\exception\ErrorException
             $exception = new ErrorException($error['type'], $error['message'], $error['file'], $error['line']);
 
             self::appException($exception);
         }
 
         // 写入日志
-        Log::save();
+        // Log::save();
     }
 
     /**
@@ -101,8 +103,8 @@ class Error
         static $handle;
         if (!$handle) {
             // 异常处理handle
-            $class = Config::get('exception_handle');
-            if ($class && class_exists($class) && is_subclass_of($class, "\\think\\exception\\Handle")) {
+            $class = '';//Config::get('exception_handle');
+            if ($class && class_exists($class) && is_subclass_of($class, "\\jframe\\exception\\Handle")) {
                 $handle = new $class;
             } else {
                 $handle = new Handle;

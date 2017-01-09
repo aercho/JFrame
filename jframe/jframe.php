@@ -63,7 +63,7 @@ require JFRAME_PATH . 'helper.php';
 \jframe\Loader::register();
 
 // 注册错误和异常处理机制
-// \jframe\Error::register();
+\jframe\Error::register();
 
 // 加载配置文件
 // \jframe\Config::set();
