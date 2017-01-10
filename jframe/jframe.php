@@ -47,7 +47,7 @@ defined('TEMP_PATH') or define('TEMP_PATH', RUNTIME_PATH . 'temp' . DS);
 /**
  * 定义系统所有配置项目的配置文件路径，入口文件可定义修改
  */
-defined('CONF_FILE') or define('CONF_FILE', APP_PATH);
+defined('CONF_FILE') or define('CONF_FILE', APP_PATH.'config.php');
 
 // 环境常量
 define('IS_CLI', PHP_SAPI == 'cli' ? true : false);
@@ -66,4 +66,4 @@ require JFRAME_PATH . 'helper.php';
 \jframe\Error::register();
 
 // 加载配置文件
-// \jframe\Config::set();
+\jframe\Config::set(include CONF_FILE);

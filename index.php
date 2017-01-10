@@ -29,5 +29,13 @@ new wechatsdk();
 
 throw new Exception('$error');
 
-*/
+
 // $1231fasd;
+
+use jframe\Config;
+dump(Config::get());
+Config::set('db_port_slave',3307);
+dump(Config::get());
+Config::reset();
+dump(Config::get());
+*/

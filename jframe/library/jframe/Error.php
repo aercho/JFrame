@@ -41,7 +41,7 @@ class Error
             $e = new ThrowableError($e);
         }
 
-        //记录错误消息至日志系统--底层是否写入日子等依据debug模式
+        //记录错误消息至日志系统--底层是否写入等依据debug模式
         self::getExceptionHandler()->report($e);
         //友好输出异常或错误信息
         self::getExceptionHandler()->send($e);
@@ -63,7 +63,7 @@ class Error
 
         // 由错误触发该方法，该方法手动抛出异常try、catch语句方可被承接到
         // 直接执行self::appException($exception);将跳过try、catch语句
-        // throw $exception;
+        throw $exception;
     }
 
     /**
