@@ -10,8 +10,6 @@
 
 namespace jframe\cache;
 
-use think\Exception;
-
 class Memcache
 {
     protected $handler = null;
