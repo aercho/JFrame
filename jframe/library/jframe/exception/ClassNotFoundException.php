@@ -6,7 +6,7 @@
  * @version $Id$
  */
 
-namespace think\exception;
+namespace jframe\exception;
 
 class ClassNotFoundException extends \RuntimeException
 {
